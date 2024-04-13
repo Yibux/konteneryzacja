@@ -1,0 +1,57 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always    
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_PASSWORD: root 
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    
+  apache:
+    depends_on:
+      - phpmyadmin
+    image: httpd:2.4
+    restart: always
+    container_name: apache
+    ports:
+      - 1234:80
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/
+
+  mongodb:
+    image:  mongo:4.4.17-focal
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: always
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
