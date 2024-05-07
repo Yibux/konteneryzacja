@@ -1,0 +1,36 @@
+{
+  "Home": "Home",
+  "About": "About project",
+  "Todo": "Todo List",
+  "PlaceholderAdd": "Type new task to do",
+  "Add": "Add",
+  "PlaceholderEdit": "Type new name of task",
+  "ChangeName": "Change Name",
+  "MarkDone": "Mark as done",
+  "HideDone": "Hide done tasks",
+  "ShowAll": "Show all tasks",
+  "TaskNumber": "Number of tasks to do",
+  "Rules": "Type at least 4 characters",
+  "LangLabel": "Choose language",
+  "Email": "Email address",
+  "Password": "Password",
+  "Register": "Register",
+  "SignWith": "Sign with",
+  "RegisterWith": "Register with",
+  "PasswordHint": "Enter your password to access the todo list",
+  "SignUp": "Sign up",
+  "SignOut": "Sign out",
+  "SignUpWith": "Sign up with",
+  "Welcome": "Welcome to the todo list website",
+  "CreateAccount": "Create account",
+  "NoAccount": "I don't have account",
+  "Cancel": "Cancel",
+  "HomeView": {
+    "Tip": "Sing up to take full advantage of the site's features.",
+    "Info": "The site allows you to log in and create your own task list using Firebase."
+  },
+  "AboutView": {
+    "Title": "About project",
+    "Text": "The project uses such technologies as:"
+  }
+}
