@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mdiHome, mdiInformationOutline, mdiCheckboxMultipleMarkedCircle, mdiMenu } from '@mdi/js'
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, handleError } from 'vue'
 import router from '@/router'
 import { useDisplay } from 'vuetify'
 
@@ -16,6 +16,21 @@ const isDesktop = computed(() => {
       return true
   }
 })
+
+onMounted(() => {
+  if (localStorage.getItem('authToken')) {
+    isLoggedIn.value = true
+  } else {
+    isLoggedIn.value = false
+  }
+})
+
+function singOut() {
+  localStorage.removeItem('authToken')
+  isLoggedIn.value = false
+  router.push('/')
+}
+
 </script>
 
 <template>
@@ -31,6 +46,16 @@ const isDesktop = computed(() => {
         ></v-list-item
       >
 
+      <v-list-item v-if="isLoggedIn"
+        ><v-btn
+          variant="elevated"
+          class="ml-1"
+          color="primary"
+          @click="singOut"
+          >{{ $t('SignOut') }}</v-btn
+        ></v-list-item
+      >
+
       
     </v-list>
 
@@ -41,7 +66,7 @@ const isDesktop = computed(() => {
         <template #prepend> <v-icon size="large" :icon="mdiHome" class="mr-4"></v-icon></template>
       </v-list-item>
 
-      <v-list-item to="/dashboard" nav :title="$t('Todo')">
+      <v-list-item to="/todo" nav :title="$t('Todo')">
         <template #prepend
           ><v-icon size="large" :icon="mdiCheckboxMultipleMarkedCircle" class="mr-4"></v-icon
         ></template>
@@ -93,7 +118,7 @@ const isDesktop = computed(() => {
           <template #prepend> <v-icon size="large" :icon="mdiHome" class="mr-4"></v-icon></template>
         </v-list-item>
 
-        <v-list-item to="/dashboard" nav :title="$t('Todo')">
+        <v-list-item to="/todo" nav :title="$t('Todo')">
           <template #prepend
             ><v-icon size="large" :icon="mdiCheckboxMultipleMarkedCircle" class="mr-4"></v-icon
           ></template>

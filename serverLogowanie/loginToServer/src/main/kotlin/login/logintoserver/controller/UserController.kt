@@ -16,9 +16,26 @@ class UserController(private val userService: UserRepository) {
     }
 
     @PostMapping("/add")
-    private fun addUser(@RequestBody user: UserRegistser): ResponseEntity<User> {
+    private fun addUser(@RequestBody user: UserRegistser): ResponseEntity<out Any> {
         val newUser = User(null, null, user.email, user.password)
+        val allUsers: MutableList<User> = userService.findAll()
+        for (u in allUsers) {
+            if (u.email == newUser.email) {
+                return ResponseEntity.badRequest().body("User already exists")
+            }
+        }
         userService.save(newUser)
-        return ResponseEntity.ok(newUser)
+        return ResponseEntity.ok("User added successfully")
+    }
+
+    @PostMapping("/login")
+    private fun loginUser(@RequestBody user: UserRequest): ResponseEntity<out Any> {
+        val allUsers: MutableList<User> = userService.findAll()
+        for (u in allUsers) {
+            if (u.email == user.email && u.password == user.password) {
+                return ResponseEntity.ok("Login successful")
+            }
+        }
+        return ResponseEntity.badRequest().body("Invalid credentials")
     }
 }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
   const email = ref('')
   const password = ref('')
+  const useRoute = useRouter()
+
 
   const registerUser = async () => {
     try {
@@ -19,10 +22,12 @@
       })
 
       if (response.ok) {
-        // Registration successful
+        const data = await response.json()
+        localStorage.setItem('authToken', data.token)
+        useRoute.push('/todo')
         console.log('User registered successfully')
       } else {
-        // Registration failed
+        
         console.error('Failed to register user')
       }
     } catch (error) {
