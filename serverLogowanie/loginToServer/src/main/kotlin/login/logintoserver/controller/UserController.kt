@@ -21,11 +21,11 @@ class UserController(private val userService: UserRepository) {
         val allUsers: MutableList<User> = userService.findAll()
         for (u in allUsers) {
             if (u.email == newUser.email) {
-                return ResponseEntity.badRequest().body("User already exists")
+                return ResponseEntity.badRequest().body(mapOf("meesage" to "User already exists"))
             }
         }
         userService.save(newUser)
-        return ResponseEntity.ok("User added successfully")
+        return ResponseEntity.ok(mapOf("meesage" to "User added successfully"))
     }
 
     @PostMapping("/login")
@@ -33,9 +33,9 @@ class UserController(private val userService: UserRepository) {
         val allUsers: MutableList<User> = userService.findAll()
         for (u in allUsers) {
             if (u.email == user.email && u.password == user.password) {
-                return ResponseEntity.ok("Login successful")
+                return ResponseEntity.ok(mapOf("meesage" to "Login successful"))
             }
         }
-        return ResponseEntity.badRequest().body("Invalid credentials")
+        return ResponseEntity.badRequest().body(mapOf("meesage" to "Invalid credentials"))
     }
 }

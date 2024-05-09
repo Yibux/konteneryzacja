@@ -1,0 +1,36 @@
+{
+  "Home": "Strona główna",
+  "About": "O projekcie",
+  "Todo": "Lista zadań",
+  "PlaceholderAdd": "Dodaj zadanie",
+  "Add": "Dodaj",
+  "PlaceholderEdit": "Wpisz nową nazwę zadania",
+  "ChangeName": "Zmień nazwę",
+  "MarkDone": "Zaznacz jako zrobione",
+  "HideDone": "Ukryj zrobione zadania",
+  "ShowAll": "Pokaż wszystkie zadania",
+  "TaskNumber": "Liczba zadań do zrobienia",
+  "Rules": "Minimum 4 znaki",
+
+  "LangLabel": "Wybierz jezyk",
+  "Email": "Adres email",
+  "Password": "Hasło",
+  "Register": "Zarejestruj",
+  "RegisterWith": "Zarejestruj z",
+  "PasswordHint": "Wpisz hasło aby uzyskać dostęp do swojej listy zadań",
+  "SignUp": "Zaloguj się",
+  "SignOut": "Wyloguj się",
+  "SignUpWith": "Zaloguj się z",
+  "Welcome": "Witaj na stronie z listą zadań",
+  "CreateAccount": "Utwórz konto",
+  "NoAccount": "Nie posiadam konta",
+  "Cancel": "Anuluj",
+  "HomeView": {
+    "Tip": "Zaloguj się, aby w pełni skorzystać z możliwości strony.",
+    "Info": "Strona pozwala na logowanie się oraz tworzenie własnej listy zadań korzystając z bazy Firebase."
+  },
+  "AboutView": {
+    "Title": "O projekcie",
+    "Text": "Projekt korzysta z takich technologi jak:"
+  }
+}
