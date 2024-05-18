@@ -26,7 +26,7 @@
         const data = await response.json()
         localStorage.setItem('authToken', data.token)
         store.commit('setLoggedIn', true)
-        useRoute.push('/todo')
+        useRoute.push('/todoList')
         console.log('User registered successfully')
       } else {
         console.log(response.body)

@@ -12,19 +12,33 @@
       const response = await fetch('user/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'mode': 'no-cors'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email: email.value,
           password: password.value
         })
       })
+      console.log(response)
       
       if (response.ok) {
         const data = await response.json()
+        console.log('data: ' + data)
         localStorage.setItem('authToken', data.token)
+        localStorage.setItem('userId', data.userId)
         store.commit('setLoggedIn', true)
+        store.commit('setUserId', data.userId)
+        
+        console.log('Response body values:')
+        for (const key in data) {
+          if (key === 'id') {
+            store.commit('setUserId', data[key])
+            localStorage.setItem('userId', data[key])
+            console.log(`Setting userId to ${data[key]}`)
+          }
+          console.log(`${key}: ${data[key]}`)
+        }
+        
         useRoute.push('/todoList')
         console.log('Login successfull')
       } else {

@@ -1,44 +1,87 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
+<script>
+import { onMounted, ref } from 'vue'
+import router from '@/router'
 
-var todos = []
-
-const todosList = async () => {
-    try {
-        const response = await fetch('todo', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'no-cors'
-            }
+export default {
+  setup() {
+    var todos = ref([])
+    const id = localStorage.getItem('id');
+    console.log(id)
+    const todosList = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/all/' + id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'mode': 'no-cors'
+          }
         })
 
         if (response.ok) {
-            const data = await response.json()
+          const data = await response.json()
 
-            for (let i = 0; i < data.length; i++) {
-                todos.push(data[i])
-            }
-            return data[0]
+          todos.value = data
+
         } else {
-            console.log(response.body)
+          console.log(response.body)
         }
-    } catch (error) {
+      } catch (error) {
         console.error('An error occurred while fetching todos:', error)
         throw error
+      }
     }
+
+    onMounted(async () => {
+      try {
+        await todosList()
+        console.log(todos.value)
+      } catch (error) {
+        console.log('An error occurred while fetching todos:', error)
+      }
+    })
+    return {
+      todos
+    }
+  },
+
+  methods: {
+    updateTodo: function (id) {
+        router.push('/EditTask/'+id)
+    },
+    deleteTodo: function (id) {
+        const deleteItem = async () => {
+            try {
+              const response = await fetch('http://localhost:5000/api/' + id, {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'mode': 'no-cors'
+                }
+              })
+      
+              if (response.ok) {
+                const data = await response.json()
+                console.log(data)
+                window.location.reload();
+              } else {
+                console.log(response.body)
+              }
+            } catch (error) {
+              console.error('An error occurred while deleting todo:', error)
+              throw error
+            }
+          }
+      
+        deleteItem()
+        
+    },
+    changeCard: function () {
+        router.push('/AddTaskToList')
+    }
+  
+  }
 
 }
-
-onMounted(async () => {
-    try {
-        await todosList()
-        console.log(todos)
-    } catch (error) {
-        console.error('An error occurred while fetching todos:', error)
-    }
-})
-
 </script>
 
 <template>
@@ -50,6 +93,7 @@ onMounted(async () => {
                     <th>Name</th>
                     <th>Status</th>
                     <th>Due Date</th>
+                    <v-btn style="background-color: rgb(207, 78, 2);" @click="changeCard">Add Task</v-btn>
                 </tr>
             </thead>
             <tbody>
@@ -57,9 +101,16 @@ onMounted(async () => {
                     <td>{{ todo.name }}</td>
                     <td>{{ todo.status }}</td>
                     <td> {{ todo.dueDate }}</td>
+                    <td>
+                        <button @click="deleteTodo(todo.id)">Delete</button>
+                    </td>
+                    <td>
+                        <button @click="updateTodo(todo.id)">Edit</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        
     </div>
 </template>
 
@@ -75,6 +126,10 @@ onMounted(async () => {
         border: 1px solid black;
         padding: 8px;
         text-align: left;
+    }
+
+    v-btn {
+        background-color: rgb(207, 78, 2);
     }
 
 </style>

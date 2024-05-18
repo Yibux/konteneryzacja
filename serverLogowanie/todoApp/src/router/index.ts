@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import ToDoView from '@/views/TodoListView.vue'
+import AddToListView from '@/views/AddToListView.vue'
+import EditTask from '@/views/EditListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +28,16 @@ const router = createRouter({
       path: '/signUp',
       name: 'signUp',
       component: LoginView
+    },
+    {
+      path: '/AddTaskToList',
+      name: 'AddTaskToList',
+      component: AddToListView
+    },
+    {
+      path: '/EditTask/:id',
+      name: 'EditTask',
+      component: EditTask
     },
     {
       path: '/todoList',

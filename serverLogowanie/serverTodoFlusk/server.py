@@ -1,9 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-import flask
-import enum
 import uuid
-import datetime
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -19,22 +16,25 @@ class Task(db.Model):
     name = db.Column(db.String(100), nullable=False)
     status = db.Column(db.Enum('TODO', 'IN_PROGRESS', 'DONE'), nullable=False)
     due_date = db.Column(db.Date)
+    owner = db.Column(db.String(100), nullable=False)
 
 class TaskRequest:
-    def __init__(self, name, status, due_date):
+    def __init__(self, name, status, due_date, owner):
         self.name = name
         self.status = status
         self.due_date = due_date
+        self.owner = owner
 
-@app.route('/api/all', methods=['GET'])
+@app.route('/api/all/{id}', methods=['GET'])
 def get_all_tasks():
-    tasks = Task.query.all()
+    tasks = Task.query.filter_by(owner=id).all()
     serialized_tasks = [
         {
             'id': task.id,
             'name': task.name,
             'status': task.status,
-            'dueDate': task.due_date.strftime('%Y-%m-%d') if task.due_date else None
+            'dueDate': task.due_date.strftime('%Y-%m-%d') if task.due_date else None,
+            'owner': task.owner
         }
         for task in tasks
     ]
@@ -48,20 +48,22 @@ def get_task(id):
             'id': task.id,
             'name': task.name,
             'status': task.status,
-            'dueDate': task.due_date.strftime('%Y-%m-%d') if task.due_date else None
+            'dueDate': task.due_date.strftime('%Y-%m-%d') if task.due_date else None,
+            'owner': task.owner
         }
         return jsonify(serialized_task)
     else:
         return jsonify({"message": "Task not found"}), 400
 
-@app.route('/api/add', methods=['POST'])
+@app.route('/api/add/{id}', methods=['POST'])
 def add_task():
     data = request.get_json()
     new_task = Task(
         id=str(uuid.uuid4()),
         name=data['name'],
         status=data['status'],
-        due_date=data['dueDate'] if 'dueDate' in data else None
+        due_date=data['dueDate'] if 'dueDate' in data else None,
+        owner=id
     )
     db.session.add(new_task)
     db.session.commit()

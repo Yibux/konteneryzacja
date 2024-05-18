@@ -60,12 +60,13 @@ export default defineConfig({
 				target: 'http://0.0.0.0:4000',
 				ws: true,
 				changeOrigin: true
-			},
-      '/todo': {
-        target: 'http://0.0.0.0:5000',
-        ws: true,
-        changeOrigin: true
-		  }
+			}
+      // ,
+      // '/api': {
+      //   target: 'http://0.0.0.0:5000',
+      //   ws: true,
+      //   changeOrigin: true
+		  // }
 	  }
   }
 })

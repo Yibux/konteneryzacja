@@ -4,9 +4,13 @@ import login.logintoserver.model.User
 import login.logintoserver.model.UserRegistser
 import login.logintoserver.model.UserRequest
 import login.logintoserver.repository.UserRepository
+import org.springframework.data.annotation.Id
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import java.net.http.HttpHeaders
+
 @RestController
 @RequestMapping("/user")
 class UserController(private val userService: UserRepository) {
@@ -25,7 +29,9 @@ class UserController(private val userService: UserRepository) {
             }
         }
         userService.save(newUser)
-        return ResponseEntity.ok(mapOf("meesage" to "User added successfully"))
+
+
+        return ResponseEntity<User>(user.email?.let { userService.findByEmail(it) }, null, 200)
     }
 
     @PostMapping("/login")
@@ -33,7 +39,11 @@ class UserController(private val userService: UserRepository) {
         val allUsers: MutableList<User> = userService.findAll()
         for (u in allUsers) {
             if (u.email == user.email && u.password == user.password) {
-                return ResponseEntity.ok(mapOf("meesage" to "Login successful"))
+                val headers = org.springframework.http.HttpHeaders()
+                headers.add("Access-Control-Allow-Origin", "*")
+                headers.add("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
+                headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+                return ResponseEntity<User>(u, headers, HttpStatus.OK)
             }
         }
         return ResponseEntity.badRequest().body(mapOf("meesage" to "Invalid credentials"))
