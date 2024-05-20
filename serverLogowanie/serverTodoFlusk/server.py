@@ -1,7 +1,11 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-import uuid
 from flask_cors import CORS
+
+import uuid
+from notion_client import Client
+from pprint import pprint
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -25,9 +29,24 @@ class TaskRequest:
         self.due_date = due_date
         self.owner = owner
 
-@app.route('/api/all/{id}', methods=['GET'])
-def get_all_tasks():
+@app.route('/api/all/<id>', methods=['GET'])
+def get_all_tasks_by_id(id):
     tasks = Task.query.filter_by(owner=id).all()
+    serialized_tasks = [
+        {
+            'id': task.id,
+            'name': task.name,
+            'status': task.status,
+            'dueDate': task.due_date.strftime('%Y-%m-%d') if task.due_date else None,
+            'owner': task.owner
+        }
+        for task in tasks
+    ]
+    return jsonify(serialized_tasks)
+
+@app.route('/api/all', methods=['GET'])
+def get_all_tasks():
+    tasks = Task.query.all()
     serialized_tasks = [
         {
             'id': task.id,
@@ -55,8 +74,8 @@ def get_task(id):
     else:
         return jsonify({"message": "Task not found"}), 400
 
-@app.route('/api/add/{id}', methods=['POST'])
-def add_task():
+@app.route('/api/add/<id>', methods=['POST'])
+def add_task(id):
     data = request.get_json()
     new_task = Task(
         id=str(uuid.uuid4()),
@@ -91,6 +110,62 @@ def delete_task(id):
         return jsonify({"message": "Task deleted successfully"})
     else:
         return jsonify({"message": "Task not found"}), 400
+
+# Notion API
+notion_token = 'secret_pGsC4Gut8iMETueuye9fio11NnKpphM3uJf3h6HLihl'
+notion_page_id = '908960236f774038bcb4c600e2160462'
+
+def write_text(client, page_id, text, type='paragraph'):
+    client.blocks.children.append(
+        block_id=page_id,
+        children=[{
+            "object": "block",
+            "type": type,
+            type: {
+                "rich_text": [{ "type": "text", "text": { "content": text } }]
+            }
+        }]
+    )
+
+def write_dict_to_file_as_json(content, file_name):
+    content_as_json_str = json.dumps(content)
+
+    with open(file_name, 'w') as f:
+        f.write(content_as_json_str)
+
+def read_text(client, page_id):
+    response = client.blocks.children.list(block_id=page_id)
+    return response['results']
+
+def create_simple_blocks_from_content(client, content):
+
+    page_simple_blocks = []
+
+    for block in content:
+
+        block_id = block['id']
+        block_type = block['type']
+        has_children = block['has_children']
+        rich_text = block[block_type].get('rich_text')
+
+        if not rich_text:
+            return
+
+
+        simple_block = {
+            'id': block_id,
+            'type': block_type,
+            'text': rich_text[0]['plain_text']
+        }
+
+        if has_children:
+            nested_children = read_text(client, block_id)
+            simple_block['children'] = create_simple_blocks_from_content(client, nested_children)
+
+        page_simple_blocks.append(simple_block)
+
+
+    return page_simple_blocks
 
 if __name__ == '__main__':
     db.create_all()

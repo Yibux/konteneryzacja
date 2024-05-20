@@ -5,8 +5,8 @@ import router from '@/router'
 export default {
   setup() {
     var todos = ref([])
-    const id = localStorage.getItem('id');
-    console.log(id)
+    const id = localStorage.getItem('userId');
+    console.log('id: ' + id)
     const todosList = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/all/' + id, {
@@ -45,8 +45,8 @@ export default {
   },
 
   methods: {
-    updateTodo: function (id) {
-        router.push('/EditTask/'+id)
+    updateTodo: function (id, name, status, dueDate) {
+        router.push({ name: 'EditTask', params: { id: id, name: name, status: status, dueDate: dueDate } })
     },
     deleteTodo: function (id) {
         const deleteItem = async () => {
@@ -105,7 +105,7 @@ export default {
                         <button @click="deleteTodo(todo.id)">Delete</button>
                     </td>
                     <td>
-                        <button @click="updateTodo(todo.id)">Edit</button>
+                        <button @click="updateTodo(todo.id, todo.name, todo.status, todo.dueDate)">Edit</button>
                     </td>
                 </tr>
             </tbody>

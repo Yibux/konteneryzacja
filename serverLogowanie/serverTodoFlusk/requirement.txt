@@ -1,0 +1,11 @@
+Flask
+request
+jsonify
+CORS
+uuid
+SQLAlchemy
+Client
+pprint
+json
+mysqlclient
+openai

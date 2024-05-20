@@ -34,7 +34,7 @@
           if (key === 'id') {
             store.commit('setUserId', data[key])
             localStorage.setItem('userId', data[key])
-            console.log(`Setting userId to ${data[key]}`)
+            console.log('getting id: ' + localStorage.getItem('userId'))
           }
           console.log(`${key}: ${data[key]}`)
         }

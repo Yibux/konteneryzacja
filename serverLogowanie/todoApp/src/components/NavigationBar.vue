@@ -26,6 +26,7 @@ onMounted(() => {
 
 function singOut() {
   localStorage.removeItem('authToken')
+  localStorage.removeItem('userId')
   store.commit('setLoggedIn', false)
   router.push('/')
 }

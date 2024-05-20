@@ -29,12 +29,12 @@
       const newTask = ref({
         name: '',
         status: 'TODO',
-        dueDate: ''
+        dueDate: new Date().toISOString().substr(0, 10)
       })
   
       const addTask = async () => {
         try {
-          const id = localStorage.getItem('id');
+          const id = localStorage.getItem('userId');
           console.log(id)
           const response = await fetch('http://localhost:5000/api/add/' + id, {
             method: 'POST',
@@ -71,22 +71,25 @@
   </script>
   
   <style scoped>
-  form {
-    display: flex;
-    flex-direction: column;
-    margin: 2%;
-  }
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 2%;
+    }
 
-  input, select {
-    margin: 2%;
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 5px;
-    color: black;
-  }
+    input, select {
+      margin: 2%;
+      background-color: white;
+      border: 1px solid white;
+      border-radius: 5px;
+      color: black;
+    }
 
-  option {
-    color: black;
-  }
+    option {
+      color: black;
+    }
+    button{
+      background-color: rgb(207, 78, 2);
+    }
   </style>
   
