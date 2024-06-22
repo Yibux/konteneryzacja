@@ -1,6 +1,7 @@
 ./db_data
 
-./db_data_mongo
+./db_mongo_data
 
 ./html
 
+.gitignore
