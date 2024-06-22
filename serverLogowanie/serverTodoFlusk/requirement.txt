@@ -8,3 +8,4 @@ mysqlclient
 flask_sqlalchemy
 notion-client
 flask_cors
+mysql-connector-python

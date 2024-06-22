@@ -4,10 +4,17 @@ from flask_cors import CORS
 
 import uuid
 from notion_client import Client
+import os
+
+database_user = os.environ.get('DATABASE_USER')
+database_port = os.environ.get('DATABASE_PORT')
+database_name = os.environ.get('DATABASE_NAME')
+database_host = os.environ.get('DATABASE_HOST')
+database_password = os.environ.get('DATABASE_PASSWORD')
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@db:3306/db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql:3306/db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 notion_token = 'secret_frHHTxg46cnG0Hwqaa18G45RcARsUrccAzpKPPs6VU2'

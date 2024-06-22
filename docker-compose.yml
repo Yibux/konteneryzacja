@@ -28,17 +28,6 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: root
     
-  # apache:
-  #   depends_on:
-  #     - phpmyadmin
-  #   image: httpd:2.4
-  #   restart: always
-  #   container_name: apache
-  #   ports:
-  #     - 1234:80
-  #   volumes:
-  #     - ./html:/usr/local/apache2/htdocs/
-
   mongodb:
     image:  mongo:4.4.17-focal
     container_name: mongodb
@@ -59,29 +48,30 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=password
       - ME_CONFIG_MONGODB_SERVER=mongodb
   
-  servertodo:
-    image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/konteneryzacja:servertodo
-    ports:
-      - 5000:5000
-    depends_on:
-      - db
-    environment:
-      DATABASE_HOST: db
-      DATABASE_PORT: 3306
-      DATABASE_NAME: db
-      DATABASE_USER: root
-      DATABASE_PASSWORD: root
   
-  loginserver:
-    image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/konteneryzacja:serverlogin
-    ports:
-      - 4000:4000
-    depends_on:
-      - mongodb
-    environment:
-      MONGO_HOST: mongodb
-      MONGO_PORT: 27017
-      MONGO_DB: users
-      MONGO_USER: admin
-      MONGO_PASSWORD: password
+  # servertodo:
+  #   image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/konteneryzacja:servertodo
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     DATABASE_HOST: db
+  #     DATABASE_PORT: 3306
+  #     DATABASE_NAME: db
+  #     DATABASE_USER: root
+  #     DATABASE_PASSWORD: root
+  
+  # loginserver:
+  #   image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/konteneryzacja:serverlogin
+  #   ports:
+  #     - 4000:4000
+  #   depends_on:
+  #     - mongodb
+  #   environment:
+  #     MONGO_HOST: mongodb
+  #     MONGO_PORT: 27017
+  #     MONGO_DB: users
+  #     MONGO_USER: admin
+  #     MONGO_PASSWORD: password
     

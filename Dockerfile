@@ -1,17 +1,4 @@
-# Use the official Python base image
-FROM python:3.9
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the requirements file to the container
-COPY requirements.txt .
-
-# Install the required dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the application code to the container
-COPY . .
-
-# Set the entry point command for the container
-CMD [ "python", "app.py" ]
+FROM php:8.2-apache
+RUN pecl install redis && docker-php-ext-enable redis
+RUN docker-php-ext-install pdo pdo_mysql
+RUN a2enmod rewrite

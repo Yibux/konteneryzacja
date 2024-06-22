@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db_mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: users
+
+  springbootapp:
+    image: springbootapp:latest
+    container_name: springbootapp
+    build: ./serverLogowanie/loginToServer
+    ports:
+      - "4000:4000"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_USERNAME: admin
+      SPRING_DATA_MONGODB_PASSWORD: password
+      SPRING_DATA_MONGODB_DATABASE: users
+      SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
+    depends_on:
+      - mongodb
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always    
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_PASSWORD: example 
+      MYSQL_USER: example
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    ports:
+      - "8081:81"
+    volumes:
+      - ./serverLogowanie/loginToServer:/usr/local/apache2/htdocs/
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+
+  task_server:
+    image: task_server:latest
+    container_name: task_server
+    build: .\serverLogowanie\serverTodoFlusk
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - mysql
+
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: db
+
+  task_client:
+    image: task_client:latest
+    container_name: task_client
+    build: .\serverLogowanie\todoApp
+    depends_on:
+      - task_server
+      - springbootapp
+    ports:
+      - "5173:5173"
+    volumes:
+    - ./vuejs:/project
+    - /project/node_modules
+      
+
+  
