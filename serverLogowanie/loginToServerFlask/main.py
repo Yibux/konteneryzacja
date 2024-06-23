@@ -20,7 +20,7 @@ authentication_database = 'admin'
 username = 'admin'
 password = 'password'
 database = 'users'
-host = '0.0.0.0'
+host = 'localhost'
 port = '27017'
 
 #spring.data.mongodb.authentication-database=admin
@@ -30,10 +30,19 @@ port = '27017'
 #spring.data.mongodb.host=0.0.0.0
 #spring.data.mongodb.port=27017
 
-client = MongoClient(host, int(port), username=username, password=password)
+# client = MongoClient(host, int(port), username=username, password=password, authSource = authentication_database)
+connection_string = f'mongodb://{username}:{password}@{host}:{port}/'
+print(connection_string)
+client = MongoClient(f'mongodb://{username}:{password}@{host}:{port}/')
+print(client)
+print(client.server_info())
+# try:
+#     print(client.list_database_names())
+# except Exception as e:
+#     print(f"Error: {e}")
 
 db = client['users']
-user_collection = db['users']
+user_collection = db['user']
 
 # Helper functions
 def user_to_dict(user):
