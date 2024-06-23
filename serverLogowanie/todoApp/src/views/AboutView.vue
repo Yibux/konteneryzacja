@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const techArray = ['vue', 'firebase', 'i18n', 'vite', 'vitepwa', 'vuetify'] as string[]
+const techArray = ['vue', 'mongoDB', 'mySQL', 'vite', 'vitepwa', 'vuetify', 'kotlin - login server', 'flask - to do server', 'api do notion'] as string[]
 </script>
 
 <template>

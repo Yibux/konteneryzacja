@@ -27,7 +27,7 @@
   "Cancel": "Anuluj",
   "HomeView": {
     "Tip": "Zaloguj się, aby w pełni skorzystać z możliwości strony.",
-    "Info": "Strona pozwala na logowanie się oraz tworzenie własnej listy zadań korzystając z bazy Firebase."
+    "Info": "Strona pozwala na logowanie się oraz tworzenie własnej listy zadań korzystając z bazy mySQL. Użytkownicy są przechowywani w MongoDB"
   },
   "AboutView": {
     "Title": "O projekcie",

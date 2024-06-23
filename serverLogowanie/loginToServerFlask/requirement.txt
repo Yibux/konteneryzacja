@@ -1,0 +1,7 @@
+Flask
+requests
+jsonify
+CORS
+flask_cors
+bson
+pymongo

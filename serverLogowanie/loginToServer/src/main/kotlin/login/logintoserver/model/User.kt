@@ -6,9 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 @Data
-class User(@Id var id: String?, var username: String?, var email: String?, var password: String?) {
-
-}
+class User(@Id var id: String?, var username: String?, var email: String?, var password: String?)
 
 class UserRequest(var username: String?, var email: String?, var password: String?)
 

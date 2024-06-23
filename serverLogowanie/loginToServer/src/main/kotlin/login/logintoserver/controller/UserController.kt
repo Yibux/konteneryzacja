@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import java.net.http.HttpHeaders
-
+@CrossOrigin(origins =["http://localhost:5173"])
 @RestController
 @RequestMapping("/user")
 class UserController(private val userService: UserRepository) {
@@ -33,6 +33,7 @@ class UserController(private val userService: UserRepository) {
 
         return ResponseEntity<User>(user.email?.let { userService.findByEmail(it) }, null, 200)
     }
+
 
     @PostMapping("/login")
     private fun loginUser(@RequestBody user: UserRequest): ResponseEntity<out Any> {
