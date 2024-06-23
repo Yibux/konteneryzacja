@@ -17,11 +17,11 @@ CORS(app)
 # port = os.environ.get('SPRING_DATA_MONGODB_PORT')
 
 authentication_database = 'admin'
-username = 'root'
-password = 'root'
+username = 'admin'
+password = 'password'
 database = 'users'
 host = 'localhost'
-port = '27017'
+port = int('27017')
 
 #spring.data.mongodb.authentication-database=admin
 #spring.data.mongodb.username=admin
@@ -33,7 +33,8 @@ port = '27017'
 # client = MongoClient(host, int(port), username=username, password=password, authSource = authentication_database)
 connection_string = f'mongodb://{username}:{password}@{host}:{port}/'
 print(connection_string)
-client = MongoClient(f'mongodb://{username}:{password}@{host}:{port}/')
+client = MongoClient(f"mongodb://{username}:{password}@{host}:27017/")
+# client = MongoClient("mongodb://admin:password@localhost:27017/")
 print(client)
 print(client.server_info())
 # try:
