@@ -17,8 +17,8 @@ CORS(app)
 # port = os.environ.get('SPRING_DATA_MONGODB_PORT')
 
 authentication_database = 'admin'
-username = 'admin'
-password = 'password'
+username = 'root'
+password = 'root'
 database = 'users'
 host = 'localhost'
 port = '27017'
