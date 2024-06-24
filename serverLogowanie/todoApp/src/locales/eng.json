@@ -27,7 +27,7 @@
   "Cancel": "Cancel",
   "HomeView": {
     "Tip": "Sing up to take full advantage of the site's features.",
-    "Info": "The site allows you to log in and create your own task list using Firebase."
+    "Info": "The site allows you to log in and create your own task list using MySQL and MongoDB."
   },
   "AboutView": {
     "Title": "About project",

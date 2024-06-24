@@ -54,9 +54,8 @@ services:
       APACHE_PORT: "9010"
 
   task_server:
-    image: task_server:latest
+    image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/task_server:latest
     container_name: task_server
-    build: .\serverLogowanie\serverTodoFlusk
     restart: always
     ports:
       - "5000:5000"
@@ -70,9 +69,8 @@ services:
       DATABASE_NAME: db
 
   login_server:
-    image: login_server:latest
+    image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/login_server:latest
     container_name: login_server
-    build: .\serverLogowanie\loginToServerFlask
     ports:
       - "4000:4000"
     depends_on:
@@ -86,9 +84,8 @@ services:
 
 
   task_client:
-    image: task_client:latest
+    image: 471112867503.dkr.ecr.eu-north-1.amazonaws.com/task_client:latest
     container_name: task_client
-    build: .\serverLogowanie\todoApp
     depends_on:
       - task_server
     ports:

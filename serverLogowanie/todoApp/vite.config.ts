@@ -20,8 +20,8 @@ export default defineConfig({
         display: 'standalone',
         scope: '/',
         start_url: '/',
-        short_name: '240754',
-        name: 'Mateusz-Milczarek-innowacja',
+        short_name: '240810',
+        name: 'Jakub-Szewczyk',
         icons: [
           {
             src: '/icon-192x192.png',
@@ -57,18 +57,5 @@ export default defineConfig({
 	server: {
     host: '0.0.0.0',
     port: 9000,
-		// proxy: {
-		// 	'/user': {
-		// 		target: 'http://localhost:4000',
-		// 		ws: true,
-		// 		changeOrigin: true
-		// 	}
-    //   // ,
-    //   // '/api': {
-    //   //   target: 'http://0.0.0.0:5000',
-    //   //   ws: true,
-    //   //   changeOrigin: true
-		//   // }
-	  // }
   }
 })
