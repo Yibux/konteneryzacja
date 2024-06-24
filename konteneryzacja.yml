@@ -28,22 +28,6 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: "27017"
 
-  # springbootapp:
-  #   image: springbootapp:latest
-  #   container_name: springbootapp
-  #   build: ./serverLogowanie/loginToServer
-  #   ports:
-  #     - "4000:4000"
-  #   environment:
-  #     SPRING_DATA_MONGODB_HOST: mongodb
-  #     SPRING_DATA_MONGODB_PORT: 27017
-  #     SPRING_DATA_MONGODB_USERNAME: admin
-  #     SPRING_DATA_MONGODB_PASSWORD: password
-  #     SPRING_DATA_MONGODB_DATABASE: users
-  #     SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
-  #   depends_on:
-  #     - mongodb
-
   mysql:
     image: mysql:5.6
     container_name: mysql
@@ -61,29 +45,16 @@ services:
   phpmyadmin:
     depends_on:
       - mysql
-      - apache
     image: phpmyadmin/phpmyadmin
     restart: always
     container_name: phpmyadmin
     ports:
-      - "8080:80"
+      - "8080:9010"
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: db
-
-  apache:
-    image: httpd:2.4
-    container_name: apache
-    ports:
-      - "8082:82"
-    volumes:
-      - ./serverLogowanie/loginToServer:/usr/local/apache2/htdocs/
-    depends_on:
-      - mysql
-    environment:
-      - DATABASE_HOST=mysql
-      - DATABASE_PORT=3306
-
+      MYSQL_ROOT_PASSWORD: root
+      APACHE_PORT: "9010"
+      
   task_server:
     image: task_server:latest
     container_name: task_server
@@ -123,10 +94,8 @@ services:
     depends_on:
       - task_server
     ports:
-      - "9000:9000"
+      - "9000:80"
     volumes:
     - ./vuejs:/project
     - /project/node_modules
-    environment:
-    - NGINX_PORT=9000
   

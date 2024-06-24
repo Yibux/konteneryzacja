@@ -56,7 +56,7 @@ export default defineConfig({
   ,
 	server: {
     host: '0.0.0.0',
-    port: 8079,
+    port: 9000,
 		// proxy: {
 		// 	'/user': {
 		// 		target: 'http://localhost:4000',
