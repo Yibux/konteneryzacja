@@ -9,26 +9,19 @@ CORS(app)
 
 # MongoDB configuration
 
-# authentication_database = os.environ.get('SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE')
-# username = os.environ.get('SPRING_DATA_MONGODB_USERNAME')
-# password = os.environ.get('SPRING_DATA_MONGODB_PASSWORD')
-# database = os.environ.get('SPRING_DATA_MONGODB_DATABASE')
-# host = os.environ.get('SPRING_DATA_MONGODB_HOST')
-# port = os.environ.get('SPRING_DATA_MONGODB_PORT')
+# authentication_database = 'admin'
+# username = 'admin'
+# password = 'password'
+# database = 'users'
+# host = 'localhost'
+# port = int('27017')
 
-authentication_database = 'admin'
-username = 'admin'
-password = 'password'
-database = 'users'
-host = 'localhost'
-port = int('27017')
+username = os.environ.get('DATABASE_USER')
+password = os.environ.get('DATABASE_PASSWORD')
+host = os.environ.get('DATABASE_HOST')
+port = os.environ.get('DATABASE_PORT')
+db_name = os.environ.get('DATABASE_NAME')
 
-#spring.data.mongodb.authentication-database=admin
-#spring.data.mongodb.username=admin
-#spring.data.mongodb.password=password
-#spring.data.mongodb.database=users
-#spring.data.mongodb.host=0.0.0.0
-#spring.data.mongodb.port=27017
 
 # client = MongoClient(host, int(port), username=username, password=password, authSource = authentication_database)
 connection_string = f'mongodb://{username}:{password}@{host}:{port}/'

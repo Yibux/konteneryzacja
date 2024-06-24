@@ -55,20 +55,20 @@ export default defineConfig({
   }
   ,
 	server: {
-    // host: '0.0.0.0',
-    // port: 8079,
-		proxy: {
-			'/user': {
-				target: 'http://localhost:4000',
-				ws: true,
-				changeOrigin: true
-			}
-      // ,
-      // '/api': {
-      //   target: 'http://0.0.0.0:5000',
-      //   ws: true,
-      //   changeOrigin: true
-		  // }
-	  }
+    host: '0.0.0.0',
+    port: 8079,
+		// proxy: {
+		// 	'/user': {
+		// 		target: 'http://localhost:4000',
+		// 		ws: true,
+		// 		changeOrigin: true
+		// 	}
+    //   // ,
+    //   // '/api': {
+    //   //   target: 'http://0.0.0.0:5000',
+    //   //   ws: true,
+    //   //   changeOrigin: true
+		//   // }
+	  // }
   }
 })

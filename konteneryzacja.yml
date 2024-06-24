@@ -44,71 +44,89 @@ services:
   #   depends_on:
   #     - mongodb
 
-  # mysql:
-  #   image: mysql:5.7
-  #   container_name: mysql
-  #   volumes:
-  #     - ./db_data:/var/lib/mysql
-  #   restart: always    
-  #   ports:
-  #     - "3306:3306"
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_DATABASE: db
-  #     MYSQL_PASSWORD: example 
-  #     MYSQL_USER: example
+  mysql:
+    image: mysql:5.6
+    container_name: mysql
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always    
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      # MYSQL_PASSWORD: example 
+      # MYSQL_USER: example
 
-  # phpmyadmin:
-  #   depends_on:
-  #     - mysql
-  #     - apache
-  #   image: phpmyadmin/phpmyadmin
-  #   restart: always
-  #   container_name: phpmyadmin
-  #   ports:
-  #     - "8080:8080"
-  #   environment:
-  #     PMA_HOST: mysql
+  phpmyadmin:
+    depends_on:
+      - mysql
+      - apache
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: db
 
-  # apache:
-  #   image: httpd:2.4
-  #   container_name: apache
-  #   ports:
-  #     - "8082:82"
-  #   volumes:
-  #     - ./serverLogowanie/loginToServer:/usr/local/apache2/htdocs/
-  #   depends_on:
-  #     - mysql
-  #   environment:
-  #     - DATABASE_HOST=mysql
-  #     - DATABASE_PORT=3306
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    ports:
+      - "8082:82"
+    volumes:
+      - ./serverLogowanie/loginToServer:/usr/local/apache2/htdocs/
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
 
-  # task_server:
-  #   image: task_server:latest
-  #   container_name: task_server
-  #   build: .\serverLogowanie\serverTodoFlusk
-  #   ports:
-  #     - "5000:5000"
+  task_server:
+    image: task_server:latest
+    container_name: task_server
+    build: .\serverLogowanie\serverTodoFlusk
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: db
 
-  #   depends_on:
-  #     - mysql
+  login_server:
+    image: login_server:latest
+    container_name: login_server
+    build: .\serverLogowanie\loginToServerFlask
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      DATABASE_HOST: mongo
+      DATABASE_PORT: 27017
+      DATABASE_USER: admin
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: users
 
-  #   environment:
-  #     DATABASE_HOST: mysql
-  #     DATABASE_PORT: 3306
-  #     DATABASE_USER: root
-  #     DATABASE_PASSWORD: root
-  #     DATABASE_NAME: db
 
-  # task_client:
-  #   image: task_client:latest
-  #   container_name: task_client
-  #   build: .\serverLogowanie\todoApp
-  #   depends_on:
-  #     - task_server
-  #   ports:
-  #     - "8079:80"
-  #   volumes:
-  #   - ./vuejs:/project
-  #   - /project/node_modules
+  task_client:
+    image: task_client:latest
+    container_name: task_client
+    build: .\serverLogowanie\todoApp
+    depends_on:
+      - task_server
+    ports:
+      - "9000:9000"
+    volumes:
+    - ./vuejs:/project
+    - /project/node_modules
+    environment:
+    - NGINX_PORT=9000
   

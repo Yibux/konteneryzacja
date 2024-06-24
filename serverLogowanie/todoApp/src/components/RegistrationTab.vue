@@ -10,11 +10,10 @@
 
   const registerUser = async () => {
     try {
-      const response = await fetch('user/add', {
+      const response = await fetch('http://localhost:4000/user/add', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'mode': 'no-cors'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email: email.value,

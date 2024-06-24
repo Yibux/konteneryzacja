@@ -6,4 +6,4 @@ COPY . /home/app
 
 RUN pip install -r /home/app/requirement.txt
 
-CMD ["python", "/home/app/server.py"]
+CMD ["python", "/home/app/main.py"]
