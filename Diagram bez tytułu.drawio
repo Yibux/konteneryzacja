@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-25T13:48:05.186Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="IT75-rQncy-k_RVHn720" version="22.1.21" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-06-25T13:49:27.685Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="9c4D8d980RgatWGA9OuK" version="22.1.21" type="github" pages="4">
   <diagram name="Diagram przepływu danych" id="2YBvvXClWsGukQMizWep">
     <mxGraphModel dx="1195" dy="622" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -106,6 +106,15 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="ZXjfPlta9NmXqEs9fwuK-5" value="Login Page" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="359" y="80" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZXjfPlta9NmXqEs9fwuK-11" value="User login" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;curved=0;rounded=0;" edge="1" parent="1" target="ZXjfPlta9NmXqEs9fwuK-5">
+          <mxGeometry width="60" relative="1" as="geometry">
+            <mxPoint x="160" y="104.5" as="sourcePoint" />
+            <mxPoint x="220" y="104.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
