@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-25T13:23:45.110Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="5OtON21LAvkxeWAhmvcr" version="22.1.21" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2024-06-25T13:26:21.816Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="0eCYxg901OgG8ujUa978" version="22.1.21" type="github" pages="3">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
     <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -64,21 +64,6 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="kQdKvI3-PvAIlNIyNwbc-1" value="Baza MongoDB - dla użytkowników" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
-          <mxGeometry x="90" y="50" width="260" height="130" as="geometry" />
-        </mxCell>
-        <mxCell id="kQdKvI3-PvAIlNIyNwbc-6" value="Id: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="kQdKvI3-PvAIlNIyNwbc-1">
-          <mxGeometry y="26" width="260" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="kQdKvI3-PvAIlNIyNwbc-2" value="Username: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="kQdKvI3-PvAIlNIyNwbc-1">
-          <mxGeometry y="52" width="260" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="kQdKvI3-PvAIlNIyNwbc-3" value="Email: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="kQdKvI3-PvAIlNIyNwbc-1">
-          <mxGeometry y="78" width="260" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="kQdKvI3-PvAIlNIyNwbc-4" value="Password: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="kQdKvI3-PvAIlNIyNwbc-1">
-          <mxGeometry y="104" width="260" height="26" as="geometry" />
-        </mxCell>
         <mxCell id="kQdKvI3-PvAIlNIyNwbc-7" value="Baza MySQL - do przechowywania zadań" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
           <mxGeometry x="470" y="50" width="260" height="156" as="geometry" />
         </mxCell>
@@ -96,6 +81,29 @@
         </mxCell>
         <mxCell id="kQdKvI3-PvAIlNIyNwbc-11" value="Due Date: Date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="kQdKvI3-PvAIlNIyNwbc-7">
           <mxGeometry y="130" width="260" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="kbDSwUO1FvMb9M-7Ufvq" name="Diagram bazy MongoDB">
+    <mxGraphModel dx="1434" dy="746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="J_dR8bwyLra_vDo4VQ0s-1" value="Baza MongoDB - dla użytkowników" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;html=1;" vertex="1" parent="1">
+          <mxGeometry x="284" y="110" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="J_dR8bwyLra_vDo4VQ0s-2" value="Id: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="J_dR8bwyLra_vDo4VQ0s-1">
+          <mxGeometry y="26" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="J_dR8bwyLra_vDo4VQ0s-3" value="Username: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="J_dR8bwyLra_vDo4VQ0s-1">
+          <mxGeometry y="52" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="J_dR8bwyLra_vDo4VQ0s-4" value="Email: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="J_dR8bwyLra_vDo4VQ0s-1">
+          <mxGeometry y="78" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="J_dR8bwyLra_vDo4VQ0s-5" value="Password: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="J_dR8bwyLra_vDo4VQ0s-1">
+          <mxGeometry y="104" width="260" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
